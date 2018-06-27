@@ -1,44 +1,75 @@
 {
   "name": "<%=projectName%>",
-  "main": "lib/<%=jsxFileName%>.js",
+  "main": "index.js",
   "version": "0.0.0",
-  "description": "{insert description}",
+  "description": "<%=description%",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cerner/<%=repository%>.git"
+    "url": "<%=repository_url%>.git"
   },
   "keywords": [
-    "Cerner",
-    "Terra",
-    <%-keywords%>"<%=projectName%>",
+    "<%=projectName%>",
     "<%=jsxFileName%>",
-    "UI"
   ],
   "author": "Cerner Corporation",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/cerner/<%=repository%>/issues"
+    "url": "<%=repository_url%>/issues"
   },
-  "homepage": "https://github.com/cerner/<%=repository%>#readme",
-  "peerDependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "terra-base": "^3.1.0"
-  },
+  "homepage": "<%=repository_url%>#readme",
   "dependencies": {
     "classnames": "^2.2.5",
     "prop-types": "^15.5.8",
-    "terra-doc-template": "^1.2.0"
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+    "react-router-dom": "^4.0.0",
+    "react-test-renderer": "^16.2.0"
+  },
+  "browserslist": [
+    "extends browserslist-config-terra",
+  ],
+  "eslintConfig": {
+    "extends": "terra"
+  },
+  "stylelint": {
+    "extends": "stylelint-config-terra"
+  },
+  "dev-dependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-jest": "^23.0.1",
+    "babel-plugin-transform-object-assign": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "browserslist-config-terra": "^1.0.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.2.2",
+    "eslint": "^3.19.0",
+    "eslint-config-terra": "^1.0.0",
+    "gh-pages": "^1.1.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^23.0.2",
+    "rimraf": "^2.6.1",
+    "shelljs": "^0.8.2",
+    "stylelint": "^9.0.0",
+    "stylelint-config-terra": "^1.0.0",
+    "terra-dev-site": "^2.0.0",
+    "terra-toolkit": "^4.0.0",
+    "webpack-merge": "^4.1.2"
   },
   "scripts": {
     "compile": "npm run compile:clean && npm run compile:build",
     "compile:clean": "rimraf lib",
     "compile:build": "babel src --out-dir lib --copy-files",
-    "lint": "npm run lint:js && npm run lint:scss",
-    "lint:js": "eslint --ext .js,.jsx . --ignore-path ../../.eslintignore",
-    "lint:scss": "stylelint src/**/*.scss",
-    "test": "npm run test:jest && npm run test:wdio",
+    "start": "tt-serve",
+    "start-static": "tt-serve-static",
+    "test": "npm run test:lint && npm run test:jest && npm run test:wdio",
+    "test:lint": "npm run test:lint:js && npm run test:lint:scss",
+    "test:lint:js": "eslint --ext .js,.jsx . --ignore-path ../../.eslintignore",
+    "test:lint:scss": "stylelint src/**/*.scss",
     "test:jest": "jest --config ../../jestconfig.js",
-    "test:wdio": "../../node_modules/.bin/wdio ../../node_modules/terra-dev-site/config/wdio/wdio.conf.js"
+    "test:wdio": "../../node_modules/.bin/wdio"
   }
 }
